@@ -11,19 +11,19 @@ interface MenuItem {
 
 const initialMenuData: MenuItem[] = [
   {
-    title: "校招管理-经理端-第一版修改",
+    title: "校招管理-经理端",
     type: "folder",
     isOpen: true,
     children: [
       { title: "校招申请单", type: "file", isActive: true },
-      { title: "校招审批单-实际需求部门", type: "file" },
+      { title: "校招审批单-需求部门", type: "file" },
       { title: "校招审批单-一级部门", type: "file" },
       { title: "校招审批单-公司", type: "file" },
       { title: "校招变更单", type: "file" },
     ]
   },
   {
-    title: "校招管理-管理端-第一版修改",
+    title: "校招管理-管理端",
     type: "folder",
     isOpen: true,
     children: [
@@ -58,11 +58,15 @@ const MenuItemComponent: React.FC<{
 
   const paddingLeft = level * 20 + 12;
 
-  const handleClick = () => {
-    if (hasChildren) {
-      setIsOpen(!isOpen);
-    } else {
-      onSelect(item.title);
+  const handleToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
+
+  const handleSelect = () => {
+    onSelect(item.title);
+    if (hasChildren && !isOpen) {
+      setIsOpen(true);
     }
   };
 
@@ -74,10 +78,13 @@ const MenuItemComponent: React.FC<{
           ${isActive ? 'bg-[#E6F7FF] text-[#1890FF]' : 'text-gray-700 hover:bg-gray-100'}
         `}
         style={{ paddingLeft: `${paddingLeft}px` }}
-        onClick={handleClick}
+        onClick={handleSelect}
       >
         {/* Indent/Arrow area */}
-        <div className="mr-1 w-4 flex justify-center shrink-0">
+        <div 
+          className="mr-1 w-4 flex justify-center shrink-0 hover:bg-gray-200 rounded"
+          onClick={hasChildren ? handleToggle : undefined}
+        >
           {hasChildren && (
             isOpen ? <ChevronDown size={14} className="text-gray-400" /> : <ChevronRight size={14} className="text-gray-400" />
           )}
@@ -115,7 +122,7 @@ const MenuItemComponent: React.FC<{
 
 export function Sidebar({ activePage, onSelect }: { activePage: string; onSelect: (page: string) => void }) {
   return (
-    <div className="w-64 bg-white border-r border-gray-200 h-full flex flex-col shrink-0 overflow-y-auto">
+    <div className="w-56 bg-white border-r border-gray-200 h-full flex flex-col shrink-0 overflow-y-auto">
       <div className="py-2">
         {initialMenuData.map((item, index) => (
           <MenuItemComponent 
