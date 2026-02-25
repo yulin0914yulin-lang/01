@@ -120,6 +120,7 @@ export function RecruitmentDetails() {
                              <th className="border-r border-b border-gray-200 py-3 px-4 font-normal text-gray-700 whitespace-nowrap">岗位</th>
                              <th className="border-r border-b border-gray-200 py-3 px-4 font-normal text-gray-700 whitespace-nowrap">实际需求部门</th>
                              <th className="border-r border-b border-gray-200 py-3 px-4 font-normal text-gray-700 whitespace-nowrap">部门全路径</th>
+                             <th className="border-r border-b border-gray-200 py-3 px-4 font-normal text-gray-700 whitespace-nowrap">关联项目名称</th>
                              <th className="border-r border-b border-gray-200 py-3 px-4 font-normal text-gray-700 whitespace-nowrap">人才类型</th>
                              <th className="border-r border-b border-gray-200 py-3 px-4 font-normal text-gray-700 whitespace-nowrap">招聘负责人</th>
                              <th className="border-r border-b border-gray-200 py-3 px-4 font-normal text-gray-700 whitespace-nowrap">职族</th>
@@ -142,6 +143,7 @@ export function RecruitmentDetails() {
                                 <td className="border-r border-b border-gray-200 py-3 px-4 text-gray-600 whitespace-nowrap">{row.position}</td>
                                 <td className="border-r border-b border-gray-200 py-3 px-4 text-gray-600 whitespace-nowrap">{row.dept}</td>
                                 <td className="border-r border-b border-gray-200 py-3 px-4 text-gray-600 whitespace-nowrap">{row.path}</td>
+                                <td className="border-r border-b border-gray-200 py-3 px-4 text-gray-600 whitespace-nowrap">2026界春招</td>
                                 <td className="border-r border-b border-gray-200 py-3 px-4 text-gray-600 whitespace-nowrap">{row.type}</td>
                                 <td className="border-r border-b border-gray-200 py-3 px-4 text-gray-600 whitespace-nowrap">{row.owner}</td>
                                 <td className="border-r border-b border-gray-200 py-3 px-4 text-gray-600 whitespace-nowrap">{row.family}</td>

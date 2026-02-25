@@ -31,6 +31,7 @@ export function RecruitmentApplication() {
         <div className="grid grid-cols-4 gap-6 bg-white p-6 border border-gray-100">
           <SearchInput label="校招项目" required />
           <Select label="实际需求部门" required />
+          <SearchInput label="关联项目岗位" />
           <StaticText label="部门现有人数" value="4" />
           <StaticText label="近三年校招生数" value="5" />
         </div>
