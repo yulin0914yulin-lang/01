@@ -27,7 +27,7 @@ export const TextInput = ({ label, required, icon, className, ...props }: InputP
     <div className="relative">
       <input
         type="text"
-        className="w-full h-9 px-3 py-2 border border-gray-300 rounded-sm text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+        className="w-full h-9 px-3 py-2 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
         {...props}
       />
       {icon && (
@@ -79,7 +79,7 @@ export const TextArea = ({ label, required, className, ...props }: TextAreaProps
   <div className={`mb-4 ${className}`}>
     <Label label={label} required={required} />
     <textarea
-      className="w-full p-3 border border-gray-300 rounded-sm text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-y min-h-[100px]"
+      className="w-full p-3 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-y min-h-[100px]"
       {...props}
     />
   </div>

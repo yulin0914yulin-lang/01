@@ -9,6 +9,11 @@ import { RecruitmentManagement } from './components/RecruitmentManagement';
 import { RecruitmentParameters } from './components/RecruitmentParameters';
 import { RecruitmentCompanyAudit } from './components/RecruitmentCompanyAudit';
 import { RecruitmentDetails } from './components/RecruitmentDetails';
+import { RecruitmentRequirementCollectionGroup } from './components/RecruitmentRequirementCollectionGroup';
+import { RecruitmentRequirementCollectionDetail } from './components/RecruitmentRequirementCollectionDetail';
+import { RecruitmentRequirementCollectionPM } from './components/RecruitmentRequirementCollectionPM';
+import { RecruitmentRequirementCollectionPMDetail } from './components/RecruitmentRequirementCollectionPMDetail';
+import { RecruitmentJobPublish } from './components/RecruitmentJobPublish';
 
 export default function App() {
   const [activePage, setActivePage] = useState("校招申请单");
@@ -28,6 +33,11 @@ export default function App() {
           {activePage === "参数设置" && <RecruitmentParameters />}
           {activePage === "公司审核" && <RecruitmentCompanyAudit />}
           {activePage === "招聘详情" && <RecruitmentDetails />}
+          {activePage === "需求收集-校招组" && <RecruitmentRequirementCollectionGroup onNavigate={setActivePage} />}
+          {activePage === "需求收集-校招组-详情" && <RecruitmentRequirementCollectionDetail onNavigate={setActivePage} />}
+          {activePage === "需求收集-校招PM" && <RecruitmentRequirementCollectionPM onNavigate={setActivePage} />}
+          {activePage === "需求收集-校招PM-详情" && <RecruitmentRequirementCollectionPMDetail onNavigate={setActivePage} />}
+          {activePage === "岗位发布" && <RecruitmentJobPublish onNavigate={setActivePage} />}
           
           {/* Default fallback or other pages can be added here */}
           {activePage !== "校招申请单" && 
@@ -38,7 +48,12 @@ export default function App() {
            activePage !== "校招管理" && 
            activePage !== "参数设置" && 
            activePage !== "公司审核" && 
-           activePage !== "招聘详情" && (
+           activePage !== "招聘详情" && 
+           activePage !== "需求收集-校招组" && 
+           activePage !== "需求收集-校招组-详情" && 
+           activePage !== "需求收集-校招PM" && 
+           activePage !== "需求收集-校招PM-详情" && 
+           activePage !== "岗位发布" && (
              <div className="p-10 text-center text-gray-500">
                页面 "{activePage}" 正在开发中...
              </div>

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Search, User, Edit3, Grid, Layout, MessageSquare, FileText, Database, 
   Bell, Globe, PlayCircle, Shirt, X, LayoutGrid, ChevronDown,
-  ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, AlertTriangle, CheckCircle
+  ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, AlertTriangle, CheckCircle, Calendar
 } from 'lucide-react';
 
 export function RecruitmentManagement() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   // Mock data
   const data = [
     { id: 1, code: 'XZ2026010101', name: '2027界校招项目', start: '2026-08-01', end: '2027-05-31', user: '校招组', time: '2025-07-23 14:47:45', active: true },
@@ -19,7 +21,7 @@ export function RecruitmentManagement() {
   ];
 
   return (
-    <div className="flex flex-col h-full w-full bg-[#F5F7FA] font-sans">
+    <div className="flex flex-col h-full w-full bg-[#F5F7FA] font-sans relative">
       {/* Blue Header */}
       <div className="h-12 bg-[#1890FF] flex items-center justify-between px-4 shrink-0 text-white">
         <div className="flex items-center gap-8 h-full">
@@ -90,7 +92,12 @@ export function RecruitmentManagement() {
            <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
               <span className="text-gray-700 text-lg font-medium">校招管理</span>
               <div className="flex gap-2">
-                 <button className="px-5 py-1.5 bg-white border border-gray-300 text-sm text-gray-700 hover:bg-gray-50 transition-colors">新建</button>
+                 <button 
+                   className="px-5 py-1.5 bg-white border border-gray-300 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                   onClick={() => setIsModalOpen(true)}
+                 >
+                   新建
+                 </button>
                  <button className="px-5 py-1.5 bg-white border border-gray-300 text-sm text-gray-700 hover:bg-gray-50 transition-colors">删除</button>
               </div>
            </div>
@@ -158,6 +165,76 @@ export function RecruitmentManagement() {
            </div>
         </div>
       </div>
+
+      {/* Modal Overlay */}
+      {isModalOpen && (
+        <div className="absolute inset-0 bg-black/30 flex items-center justify-center z-50">
+          <div className="bg-white w-[450px] shadow-lg flex flex-col relative rounded-sm">
+            {/* Modal Header */}
+            <div className="p-4 border-b border-gray-100">
+              <h2 className="text-base text-gray-800 font-medium">新建</h2>
+            </div>
+            
+            {/* Modal Body */}
+            <div className="px-8 py-8 flex flex-col gap-5">
+              {/* Project Name */}
+              <div className="flex items-center">
+                <label className="w-28 text-right text-gray-600 text-sm mr-3">
+                  <span className="text-red-500 mr-1">*</span>项目名称:
+                </label>
+                <input 
+                  type="text" 
+                  className="flex-1 border border-gray-300 h-8 px-2 text-sm outline-none focus:border-blue-500 rounded-sm"
+                />
+              </div>
+
+              {/* Start Date */}
+              <div className="flex items-center">
+                <label className="w-28 text-right text-gray-600 text-sm mr-3">
+                  <span className="text-red-500 mr-1">*</span>校招期间开始:
+                </label>
+                <div className="flex-1 relative">
+                  <input 
+                    type="text" 
+                    className="w-full border border-gray-300 h-8 px-2 text-sm outline-none focus:border-blue-500 rounded-sm"
+                  />
+                  <Calendar className="absolute right-2 top-2 text-gray-400" size={16} />
+                </div>
+              </div>
+
+              {/* End Date */}
+              <div className="flex items-center">
+                <label className="w-28 text-right text-gray-600 text-sm mr-3">
+                  <span className="text-red-500 mr-1">*</span>校招期间结束:
+                </label>
+                <div className="flex-1 relative">
+                  <input 
+                    type="text" 
+                    className="w-full border border-gray-300 h-8 px-2 text-sm outline-none focus:border-blue-500 rounded-sm"
+                  />
+                  <Calendar className="absolute right-2 top-2 text-gray-400" size={16} />
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 flex justify-end gap-3 border-t border-gray-100 bg-gray-50/50">
+              <button 
+                className="px-4 py-1.5 border border-gray-300 text-gray-600 bg-white hover:bg-gray-50 text-sm rounded-sm"
+                onClick={() => setIsModalOpen(false)}
+              >
+                取消
+              </button>
+              <button 
+                className="px-4 py-1.5 bg-[#1890FF] text-white hover:bg-blue-600 text-sm rounded-sm"
+                onClick={() => setIsModalOpen(false)}
+              >
+                确定
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
