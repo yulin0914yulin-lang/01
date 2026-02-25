@@ -105,7 +105,9 @@ export function RecruitmentRequirementCollectionPMDetail({ onNavigate }: { onNav
                     <StepLine />
                     <Step number={2} title="需求收集" active />
                     <StepLine />
-                    <Step number={3} title="公司审核" />
+                    <div onClick={() => onNavigate && onNavigate("公司审核")} className="cursor-pointer hover:opacity-80">
+                       <Step number={3} title="公司审核" />
+                    </div>
                     <StepLine />
                     <Step number={4} title="岗位发布" />
                  </div>

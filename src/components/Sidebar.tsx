@@ -29,7 +29,7 @@ const initialMenuData: MenuItem[] = [
     children: [
       {
         title: "校招管理",
-        type: "folder",
+        type: "file",
         isOpen: true,
         children: [
           { title: "参数设置", type: "file" },

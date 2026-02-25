@@ -72,11 +72,22 @@ export function RecruitmentApprovalCompany() {
       {/* Sequence Summary */}
       <Section title="序列汇总情况">
         <div className="bg-white p-6 border border-gray-100">
-          <div className="w-64 mb-6 relative">
+          <div className="flex items-center gap-4 mb-6 flex-wrap">
              <div className="flex items-center border border-gray-300 rounded-sm px-2 bg-white">
-                <span className="text-sm text-gray-600 mr-2">序列:</span>
-                <input type="text" className="flex-1 h-8 text-sm outline-none" />
-                <Search size={14} className="text-gray-400" />
+                <span className="text-sm text-gray-600 mr-2">一级序列:</span>
+                <input type="text" className="w-32 h-8 text-sm outline-none" />
+             </div>
+             <div className="flex items-center border border-gray-300 rounded-sm px-2 bg-white">
+                <span className="text-sm text-gray-600 mr-2">二级序列:</span>
+                <input type="text" className="w-32 h-8 text-sm outline-none" />
+             </div>
+             <div className="flex items-center border border-gray-300 rounded-sm px-2 bg-white">
+                <span className="text-sm text-gray-600 mr-2">三级序列:</span>
+                <input type="text" className="w-32 h-8 text-sm outline-none" />
+             </div>
+             <div className="flex items-center border border-gray-300 rounded-sm px-2 bg-white">
+                <span className="text-sm text-gray-600 mr-2">序列全描述:</span>
+                <input type="text" className="w-40 h-8 text-sm outline-none" />
              </div>
           </div>
           

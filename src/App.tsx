@@ -29,9 +29,9 @@ export default function App() {
           {activePage === "校招审批单-一级部门" && <RecruitmentApprovalLevel1 />}
           {activePage === "校招审批单-公司" && <RecruitmentApprovalCompany />}
           {activePage === "校招变更单" && <RecruitmentChangeOrder />}
-          {activePage === "校招管理" && <RecruitmentManagement />}
-          {activePage === "参数设置" && <RecruitmentParameters />}
-          {activePage === "公司审核" && <RecruitmentCompanyAudit />}
+          {activePage === "校招管理" && <RecruitmentManagement onNavigate={setActivePage} />}
+          {activePage === "参数设置" && <RecruitmentParameters onNavigate={setActivePage} />}
+          {activePage === "公司审核" && <RecruitmentCompanyAudit onNavigate={setActivePage} />}
           {activePage === "招聘详情" && <RecruitmentDetails />}
           {activePage === "需求收集-校招组" && <RecruitmentRequirementCollectionGroup onNavigate={setActivePage} />}
           {activePage === "需求收集-校招组-详情" && <RecruitmentRequirementCollectionDetail onNavigate={setActivePage} />}

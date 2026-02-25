@@ -5,7 +5,7 @@ import {
   ArrowLeft, ChevronUp
 } from 'lucide-react';
 
-export function RecruitmentParameters() {
+export function RecruitmentParameters({ onNavigate }: { onNavigate?: (page: string) => void }) {
   return (
     <div className="flex flex-col h-full w-full bg-[#F5F7FA] font-sans">
       {/* Blue Header */}
@@ -76,7 +76,11 @@ export function RecruitmentParameters() {
         <div className="flex-1 flex flex-col overflow-hidden bg-[#F0F2F5]">
            {/* Breadcrumb/Title Bar */}
            <div className="h-14 bg-[#F5F7FA] flex items-center px-6 shrink-0">
-              <ArrowLeft size={18} className="text-gray-500 mr-2 cursor-pointer" />
+              <ArrowLeft 
+                size={18} 
+                className="text-gray-500 mr-2 cursor-pointer hover:text-gray-700" 
+                onClick={() => onNavigate && onNavigate("校招管理")}
+              />
               <span className="text-gray-700 text-lg font-medium">校招管理详情页</span>
            </div>
 
@@ -88,7 +92,9 @@ export function RecruitmentParameters() {
                  <div className="flex items-center justify-center mb-12">
                     <Step number={1} title="参数设置" active />
                     <StepLine />
-                    <Step number={2} title="需求收集" />
+                    <div onClick={() => onNavigate && onNavigate("需求收集-校招组")} className="cursor-pointer hover:opacity-80">
+                       <Step number={2} title="需求收集" />
+                    </div>
                     <StepLine />
                     <Step number={3} title="公司审核" />
                     <StepLine />

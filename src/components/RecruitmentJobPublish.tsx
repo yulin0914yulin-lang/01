@@ -87,7 +87,11 @@ export function RecruitmentJobPublish({ onNavigate }: { onNavigate?: (page: stri
         <div className="flex-1 flex flex-col overflow-hidden bg-[#F0F2F5]">
            {/* Breadcrumb/Title Bar */}
            <div className="h-14 bg-[#F5F7FA] flex items-center px-6 shrink-0">
-              <ArrowLeft size={18} className="text-gray-500 mr-2 cursor-pointer" />
+              <ArrowLeft 
+                size={18} 
+                className="text-gray-500 mr-2 cursor-pointer hover:text-gray-700" 
+                onClick={() => onNavigate && onNavigate("校招管理")}
+              />
               <span className="text-gray-700 text-lg font-medium">校招管理详情页</span>
            </div>
 

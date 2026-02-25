@@ -87,7 +87,11 @@ export function RecruitmentRequirementCollectionGroup({ onNavigate }: { onNaviga
         <div className="flex-1 flex flex-col overflow-hidden bg-[#F0F2F5]">
            {/* Breadcrumb/Title Bar */}
            <div className="h-14 bg-[#F5F7FA] flex items-center px-6 shrink-0">
-              <ArrowLeft size={18} className="text-gray-500 mr-2 cursor-pointer" />
+              <ArrowLeft 
+                size={18} 
+                className="text-gray-500 mr-2 cursor-pointer hover:text-gray-700" 
+                onClick={() => onNavigate && onNavigate("校招管理")}
+              />
               <span className="text-gray-700 text-lg font-medium">校招管理详情页</span>
            </div>
 
@@ -101,7 +105,9 @@ export function RecruitmentRequirementCollectionGroup({ onNavigate }: { onNaviga
                     <StepLine />
                     <Step number={2} title="需求收集" active />
                     <StepLine />
-                    <Step number={3} title="公司审核" />
+                    <div onClick={() => onNavigate && onNavigate("公司审核")} className="cursor-pointer hover:opacity-80">
+                       <Step number={3} title="公司审核" />
+                    </div>
                     <StepLine />
                     <Step number={4} title="岗位发布" />
                  </div>
