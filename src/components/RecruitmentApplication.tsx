@@ -2,12 +2,14 @@ import React from 'react';
 import { Section } from './Section';
 import { TextInput, SearchInput, Select, TextArea, StaticText, Label } from './FormFields';
 
-export function RecruitmentApplication() {
+export function RecruitmentApplication({ isNonWindowPeriod = false }: { isNonWindowPeriod?: boolean }) {
   return (
     <div className="max-w-7xl mx-auto px-6 py-4 space-y-4 pb-20">
       {/* Header Block */}
       <div className="bg-white px-6 py-4 border border-gray-200 shadow-sm flex items-center justify-between">
-        <h1 className="text-xl font-bold text-gray-800">招聘申请单</h1>
+        <h1 className="text-xl font-bold text-gray-800">
+          {isNonWindowPeriod ? "校招申请单（非窗口期）" : "招聘申请单"}
+        </h1>
         <div className="flex gap-3">
           <button className="px-6 py-1.5 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-50 transition-colors">
             保存
@@ -29,9 +31,8 @@ export function RecruitmentApplication() {
       {/* Section 2: Department Info */}
       <Section title="需求部门情况">
         <div className="grid grid-cols-4 gap-6 bg-white p-6 border border-gray-100">
-          <SearchInput label="校招项目" required />
+          {!isNonWindowPeriod && <SearchInput label="校招项目" required />}
           <Select label="实际需求部门" required />
-          <SearchInput label="关联项目岗位" />
           <StaticText label="部门现有人数" value="4" />
           <StaticText label="近三年校招生数" value="5" />
         </div>
@@ -42,6 +43,7 @@ export function RecruitmentApplication() {
         <div className="bg-white p-6 border border-gray-100">
           {/* Toolbar */}
           <div className="flex justify-end gap-2 mb-4">
+            <button className="px-4 py-1.5 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-50">导入</button>
             <button className="px-4 py-1.5 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-50">添加</button>
             <button className="px-4 py-1.5 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-50">删除</button>
             <button className="px-4 py-1.5 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-50">复制</button>
@@ -56,25 +58,18 @@ export function RecruitmentApplication() {
 
             {/* Grid Form */}
             <div className="grid grid-cols-4 gap-x-6 gap-y-2">
-              <Select label="职族" required />
+              <TextInput label="职族" required defaultValue="P" disabled />
               <SearchInput label="序列" required />
-              <Select label="职级" required />
+              <TextInput label="职级" required disabled />
               <SearchInput label="岗位" required />
               
               <TextInput label="招聘岗位人数" required />
               <Select label="人才类型" required />
               <SearchInput label="直接上级" required />
-              <Select label="学历" required />
+              <Select label="学历要求" required />
               
-              <TextInput label="专业" required />
+              <TextInput label="专业要求" required />
               <Select label="语言要求" required />
-              
-              <div className="mb-4">
-                <Label label="公司任职资格标准" />
-                <div className="h-9 flex items-center">
-                  <a href="#" className="text-sm text-cyan-500 hover:underline">点击链接查看任职资格详情</a>
-                </div>
-              </div>
             </div>
 
             {/* Text Areas Section */}
@@ -83,7 +78,11 @@ export function RecruitmentApplication() {
 
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-8">
-                  <TextArea label="任职资格" required className="bg-white h-full" rows={6} />
+                  <TextArea 
+                    label={<span>任职资格 <a href="#" className="text-cyan-500 hover:underline font-normal ml-1">（点击链接查看任职资格详情）</a></span>} 
+                    required 
+                    className="bg-white h-full" 
+                  />
                 </div>
                 <div className="col-span-4">
                   <Label label="任职资格自查项" required />
@@ -104,7 +103,7 @@ export function RecruitmentApplication() {
 
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-8">
-                  <TextArea label="工作职责" required className="bg-white h-full" rows={6} />
+                  <TextArea label="工作职责" required className="bg-white h-full" />
                 </div>
                 <div className="col-span-4">
                   <Label label="自查项" required />

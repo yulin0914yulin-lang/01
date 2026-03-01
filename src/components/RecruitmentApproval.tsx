@@ -9,10 +9,10 @@ const ReadOnlyField = ({ label }: { label: string }) => (
   </div>
 );
 
-const ReadOnlyTextArea = ({ label, height = "h-24" }: { label: string, height?: string }) => (
-  <div className="mb-4">
+const ReadOnlyTextArea = ({ label, height = "h-24", className = "" }: { label: React.ReactNode, height?: string, className?: string }) => (
+  <div className={`mb-4 flex flex-col ${className}`}>
     <div className="text-sm font-bold text-gray-700 mb-2">{label}</div>
-    <div className={`bg-[#F2F3F5] ${height} w-full rounded-sm`}></div>
+    <div className={`bg-[#F2F3F5] ${height} w-full rounded-sm ${height === 'h-full' ? 'flex-1' : ''}`}></div>
   </div>
 );
 
@@ -64,15 +64,10 @@ export function RecruitmentApproval() {
                 <ReadOnlyField label="招聘岗位人数" />
                 <ReadOnlyField label="人才类型" />
                 <ReadOnlyField label="直接上级" />
-                <ReadOnlyField label="学历" />
+                <ReadOnlyField label="学历要求" />
                 
-                <ReadOnlyField label="专业" />
+                <ReadOnlyField label="专业要求" />
                 <ReadOnlyField label="语言要求" />
-                
-                <div className="flex items-center gap-4 mb-4">
-                   <span className="text-sm font-bold text-gray-700 min-w-[5em]">公司任职资格标准</span>
-                   <a href="#" className="text-sm text-cyan-500 hover:underline">点击链接查看任职资格详情</a>
-                </div>
              </div>
 
              <div className="mt-2 space-y-6">
@@ -80,7 +75,11 @@ export function RecruitmentApproval() {
                 
                 <div className="grid grid-cols-12 gap-6">
                   <div className="col-span-8">
-                    <ReadOnlyTextArea label="任职资格" height="h-32" />
+                    <ReadOnlyTextArea 
+                      label={<span>任职资格 <a href="#" className="text-cyan-500 hover:underline font-normal ml-1">（点击链接查看任职资格详情）</a></span>}
+                      height="h-full" 
+                      className="h-full" 
+                    />
                   </div>
                   <div className="col-span-4">
                      <Label label="任职资格自查项" />
@@ -101,7 +100,7 @@ export function RecruitmentApproval() {
 
                 <div className="grid grid-cols-12 gap-6">
                   <div className="col-span-8">
-                    <ReadOnlyTextArea label="工作职责" height="h-32" />
+                    <ReadOnlyTextArea label="工作职责" height="h-full" className="h-full" />
                   </div>
                   <div className="col-span-4">
                      <Label label="自查项" />

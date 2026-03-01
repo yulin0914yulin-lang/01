@@ -24,7 +24,9 @@ export default function App() {
       
       <div className="flex-1 flex flex-col h-full overflow-hidden">
         <main className="flex-1 overflow-y-auto h-full">
-          {activePage === "校招申请单" && <RecruitmentApplication />}
+          {(activePage === "校招申请单" || activePage === "校招申请单（非窗口期）") && (
+            <RecruitmentApplication isNonWindowPeriod={activePage === "校招申请单（非窗口期）"} />
+          )}
           {activePage === "校招审批单-需求部门" && <RecruitmentApproval />}
           {activePage === "校招审批单-一级部门" && <RecruitmentApprovalLevel1 />}
           {activePage === "校招审批单-公司" && <RecruitmentApprovalCompany />}
@@ -41,6 +43,7 @@ export default function App() {
           
           {/* Default fallback or other pages can be added here */}
           {activePage !== "校招申请单" && 
+           activePage !== "校招申请单（非窗口期）" && 
            activePage !== "校招审批单-需求部门" && 
            activePage !== "校招审批单-一级部门" && 
            activePage !== "校招审批单-公司" && 

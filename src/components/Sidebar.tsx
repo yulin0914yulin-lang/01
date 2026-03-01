@@ -16,6 +16,7 @@ const initialMenuData: MenuItem[] = [
     isOpen: true,
     children: [
       { title: "校招申请单", type: "file", isActive: true },
+      { title: "校招申请单（非窗口期）", type: "file" },
       { title: "校招审批单-需求部门", type: "file" },
       { title: "校招审批单-一级部门", type: "file" },
       { title: "校招审批单-公司", type: "file" },

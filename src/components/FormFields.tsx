@@ -2,7 +2,7 @@ import React from 'react';
 import { Search, ChevronDown } from 'lucide-react';
 
 interface FieldProps {
-  label: string;
+  label: React.ReactNode;
   required?: boolean;
   className?: string;
 }
@@ -19,6 +19,8 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   required?: boolean;
   icon?: React.ReactNode;
   className?: string;
+  defaultValue?: string | number | readonly string[];
+  disabled?: boolean;
 }
 
 export const TextInput = ({ label, required, icon, className, ...props }: InputProps) => (
@@ -27,7 +29,7 @@ export const TextInput = ({ label, required, icon, className, ...props }: InputP
     <div className="relative">
       <input
         type="text"
-        className="w-full h-9 px-3 py-2 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+        className="w-full h-9 px-3 py-2 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors disabled:bg-gray-100 disabled:text-gray-500"
         {...props}
       />
       {icon && (
@@ -69,17 +71,17 @@ export const Select = ({ label, required, options = [], className, ...props }: S
 );
 
 interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label: string;
+  label: React.ReactNode;
   required?: boolean;
   className?: string;
   rows?: number;
 }
 
 export const TextArea = ({ label, required, className, ...props }: TextAreaProps) => (
-  <div className={`mb-4 ${className}`}>
+  <div className={`mb-4 flex flex-col ${className}`}>
     <Label label={label} required={required} />
     <textarea
-      className="w-full p-3 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-y min-h-[100px]"
+      className="w-full p-3 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-y flex-1"
       {...props}
     />
   </div>
