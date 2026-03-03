@@ -122,7 +122,6 @@ export function RecruitmentManagement({ onNavigate }: { onNavigate?: (page: stri
                               <th className="border-r border-b border-gray-200 py-3 font-normal text-gray-700 w-12">序号</th>
                               <th className="border-r border-b border-gray-200 py-3 font-normal text-gray-700 w-32">项目编号</th>
                               <th className="border-r border-b border-gray-200 py-3 font-normal text-gray-700 w-32">名称</th>
-                              <th className="border-r border-b border-gray-200 py-3 font-normal text-gray-700 w-32">关联项目名称</th>
                               <th className="border-r border-b border-gray-200 py-3 font-normal text-gray-700 w-28">校招期间开始</th>
                               <th className="border-r border-b border-gray-200 py-3 font-normal text-gray-700 w-28">校招期间结束</th>
                               <th className="border-r border-b border-gray-200 py-3 font-normal text-gray-700 w-20">更新人</th>
@@ -139,7 +138,6 @@ export function RecruitmentManagement({ onNavigate }: { onNavigate?: (page: stri
                                  <td className="border-r border-b border-gray-200 py-3 text-gray-600">{row.id}</td>
                                  <td className="border-r border-b border-gray-200 py-3 text-gray-600">{row.code}</td>
                                  <td className="border-r border-b border-gray-200 py-3 text-gray-600">{row.name}</td>
-                                 <td className="border-r border-b border-gray-200 py-3 text-gray-600">{row.relatedProject}</td>
                                  <td className="border-r border-b border-gray-200 py-3 text-gray-600">{row.start}</td>
                                  <td className="border-r border-b border-gray-200 py-3 text-gray-600">{row.end}</td>
                                  <td className="border-r border-b border-gray-200 py-3 text-gray-600">{row.user}</td>
@@ -233,19 +231,7 @@ export function RecruitmentManagement({ onNavigate }: { onNavigate?: (page: stri
                  </div>
                </div>
 
-               {/* Related Project */}
-               <div className="flex items-center">
-                 <label className="w-28 text-right text-gray-600 text-sm mr-3">
-                   关联项目:
-                 </label>
-                 <div className="flex-1 relative">
-                   <input 
-                     type="text" 
-                     className="w-full border border-gray-300 h-8 px-2 text-sm outline-none focus:border-blue-500 rounded-sm"
-                   />
-                   <Search className="absolute right-2 top-2 text-gray-400" size={16} />
-                 </div>
-               </div>
+
              </div>
  
              {/* Modal Footer */}

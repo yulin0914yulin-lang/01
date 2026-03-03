@@ -50,6 +50,7 @@ interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   required?: boolean;
   options?: string[];
   className?: string;
+  disabled?: boolean;
 }
 
 export const Select = ({ label, required, options = [], className, ...props }: SelectProps) => (
@@ -57,7 +58,7 @@ export const Select = ({ label, required, options = [], className, ...props }: S
     <Label label={label} required={required} />
     <div className="relative">
       <select
-        className="w-full h-9 px-3 py-2 border border-gray-300 rounded-sm text-sm appearance-none bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors pr-8"
+        className="w-full h-9 px-3 py-2 border border-gray-300 rounded-sm text-sm appearance-none bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors pr-8 disabled:bg-gray-100 disabled:text-gray-500"
         {...props}
       >
         <option value="">请选择</option>
@@ -75,13 +76,14 @@ interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
   required?: boolean;
   className?: string;
   rows?: number;
+  disabled?: boolean;
 }
 
 export const TextArea = ({ label, required, className, ...props }: TextAreaProps) => (
   <div className={`mb-4 flex flex-col ${className}`}>
     <Label label={label} required={required} />
     <textarea
-      className="w-full p-3 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-y flex-1"
+      className="w-full p-3 border border-gray-300 rounded-sm text-sm bg-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors resize-y flex-1 disabled:bg-gray-100 disabled:text-gray-500"
       {...props}
     />
   </div>

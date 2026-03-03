@@ -2,12 +2,14 @@ import React from 'react';
 import { Section } from './Section';
 import { TextInput, SearchInput, Select, TextArea, StaticText, Label } from './FormFields';
 
-export function RecruitmentChangeOrder() {
+export function RecruitmentChangeOrder({ isNonWindowPeriod = false }: { isNonWindowPeriod?: boolean }) {
   return (
     <div className="max-w-7xl mx-auto px-6 py-4 space-y-4 pb-20">
       {/* Header Block */}
       <div className="bg-white px-6 py-4 border border-gray-200 shadow-sm flex items-center justify-between">
-        <h1 className="text-xl font-bold text-gray-800">招聘申请单</h1>
+        <h1 className="text-xl font-bold text-gray-800">
+          {isNonWindowPeriod ? "校招变更单（非窗口期）" : "招聘申请单"}
+        </h1>
         <div className="flex gap-3">
           <button className="px-6 py-1.5 border border-gray-300 rounded text-sm text-gray-600 hover:bg-gray-50 transition-colors">
             保存
@@ -29,26 +31,13 @@ export function RecruitmentChangeOrder() {
       {/* Section 2: Change Request Info - NEW SECTION */}
       <Section title="变更需求">
         <div className="bg-white p-6 border border-gray-100">
-           <div className="w-1/4">
+           <div className="grid grid-cols-4 gap-6">
+             <SearchInput label="校招项目" required />
              <SearchInput label="需变更的招聘需求" required />
+             <Select label="实际需求部门" required />
+             <StaticText label="部门现有人数" value="4" />
+             <StaticText label="近三年校招生数" value="5" />
            </div>
-        </div>
-      </Section>
-
-      {/* Section 3: Department Info */}
-      <Section title="需求部门情况">
-        <div className="grid grid-cols-4 gap-6 bg-white p-6 border border-gray-100">
-          {/* Modified Field: Read-only style for Campus Recruitment Project */}
-          <div className="mb-4">
-            <Label label="校招项目" required />
-            <div className="w-full h-9 px-3 py-2 border border-gray-300 rounded-sm text-sm bg-[#D9D9D9] text-gray-700 flex items-center">
-              2027界校招项目
-            </div>
-          </div>
-          
-          <Select label="实际需求部门" required />
-          <StaticText label="部门现有人数" value="4" />
-          <StaticText label="近三年校招生数" value="5" />
         </div>
       </Section>
 
@@ -71,34 +60,32 @@ export function RecruitmentChangeOrder() {
 
             {/* Grid Form */}
             <div className="grid grid-cols-4 gap-x-6 gap-y-2">
-              <Select label="职族" required />
-              <SearchInput label="序列" required />
-              <Select label="职级" required />
-              <SearchInput label="岗位" required />
+              <Select label="职族" required disabled={isNonWindowPeriod} />
+              <SearchInput label="序列" required disabled={isNonWindowPeriod} />
+              <Select label="职级" required disabled={isNonWindowPeriod} />
+              <SearchInput label="岗位" required disabled={isNonWindowPeriod} />
               
               <TextInput label="招聘岗位人数" required />
-              <Select label="人才类型" required />
-              <SearchInput label="直接上级" required />
-              <Select label="学历" required />
+              <Select label="人才类型" required disabled={isNonWindowPeriod} />
+              <SearchInput label="直接上级" required disabled={isNonWindowPeriod} />
+              <Select label="学历" required disabled={isNonWindowPeriod} />
               
-              <TextInput label="专业" required />
-              <Select label="语言要求" required />
-              
-              <div className="mb-4">
-                <Label label="公司任职资格标准" />
-                <div className="h-9 flex items-center">
-                  <a href="#" className="text-sm text-cyan-500 hover:underline">点击链接查看任职资格详情</a>
-                </div>
-              </div>
+              <TextInput label="专业" required disabled={isNonWindowPeriod} />
+              <Select label="语言要求" required disabled={isNonWindowPeriod} />
             </div>
 
             {/* Text Areas Section */}
             <div className="mt-2 space-y-6">
-              <TextArea label="岗位招聘申请理由" required className="bg-white" rows={4} />
+              <TextArea label="岗位招聘申请理由" required className="bg-white" rows={4} disabled={isNonWindowPeriod} />
 
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-8">
-                  <TextArea label="任职资格" required className="bg-white h-full" rows={6} />
+                  <TextArea 
+                    label={<span>任职资格 <a href="#" className="text-cyan-500 hover:underline font-normal ml-1">（点击链接查看任职资格详情）</a></span>} 
+                    required 
+                    className="bg-white h-full" 
+                    disabled={isNonWindowPeriod}
+                  />
                 </div>
                 <div className="col-span-4">
                   <Label label="任职资格自查项" required />
@@ -109,7 +96,7 @@ export function RecruitmentChangeOrder() {
                       "必要的附加要求是否明确-任职资格"
                     ].map((item, i) => (
                       <label key={i} className="flex items-start gap-2 text-xs text-gray-700 cursor-pointer">
-                        <input type="radio" name="qual_check" className="mt-0.5" />
+                        <input type="radio" name="qual_check" className="mt-0.5" disabled={isNonWindowPeriod} />
                         <span>{item}</span>
                       </label>
                     ))}
@@ -119,7 +106,7 @@ export function RecruitmentChangeOrder() {
 
               <div className="grid grid-cols-12 gap-6">
                 <div className="col-span-8">
-                  <TextArea label="工作职责" required className="bg-white h-full" rows={6} />
+                  <TextArea label="工作职责" required className="bg-white h-full" disabled={isNonWindowPeriod} />
                 </div>
                 <div className="col-span-4">
                   <Label label="自查项" required />
@@ -131,7 +118,7 @@ export function RecruitmentChangeOrder() {
                       "职责按重要性降序排列-工作职责"
                     ].map((item, i) => (
                       <label key={i} className="flex items-start gap-2 text-xs text-gray-700 cursor-pointer">
-                        <input type="radio" name="resp_check" className="mt-0.5" />
+                        <input type="radio" name="resp_check" className="mt-0.5" disabled={isNonWindowPeriod} />
                         <span>{item}</span>
                       </label>
                     ))}
@@ -139,7 +126,7 @@ export function RecruitmentChangeOrder() {
                 </div>
               </div>
 
-              <TextArea label="其他要求" required className="bg-white" rows={4} />
+              <TextArea label="其他要求" required className="bg-white" rows={4} disabled={isNonWindowPeriod} />
             </div>
           </div>
         </div>

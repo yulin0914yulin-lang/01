@@ -90,15 +90,16 @@ export function RecruitmentCompanyAudit({ onNavigate }: { onNavigate?: (page: st
                  
                  {/* Stepper */}
                  <div className="flex items-center justify-center mb-12">
-                    <Step number={1} title="参数设置" />
+                    <div onClick={() => onNavigate && onNavigate("参数设置")} className="cursor-pointer hover:opacity-80">
+                       <Step number={1} title="参数设置" />
+                    </div>
                     <StepLine />
-                    <Step number={2} title="需求收集" />
+                    <div onClick={() => onNavigate && onNavigate("需求收集-校招组")} className="cursor-pointer hover:opacity-80">
+                       <Step number={2} title="需求收集" />
+                    </div>
                     <StepLine />
                     <Step number={3} title="公司审核" active />
-                    <StepLine />
-                    <div onClick={() => onNavigate && onNavigate("岗位发布")} className="cursor-pointer hover:opacity-80">
-                       <Step number={4} title="岗位发布" />
-                    </div>
+
                  </div>
 
                  {/* Section 1: Basic Info */}

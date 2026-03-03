@@ -147,7 +147,7 @@ const sequenceData: SequenceNode[] = [
   }
 ];
 
-export function RecruitmentApprovalLevel1() {
+export function RecruitmentApprovalLevel1({ onNavigate }: { onNavigate?: (page: string) => void }) {
   const [activeTab, setActiveTab] = React.useState<'sequence' | 'details'>('sequence');
   const [expandedRows, setExpandedRows] = React.useState<Set<string>>(new Set());
 
@@ -309,7 +309,12 @@ export function RecruitmentApprovalLevel1() {
                          <td key={i} className="py-4"><div className="bg-[#F2F3F5] py-1.5 mx-2 h-7 rounded-sm"></div></td>
                       ))}
                       <td className="py-4">
-                        <button className="text-[#9B1C33] hover:underline font-medium">查看详情</button>
+                        <button 
+                          className="text-[#9B1C33] hover:underline font-medium"
+                          onClick={() => onNavigate && onNavigate("校招审批单-需求部门")}
+                        >
+                          查看详情
+                        </button>
                       </td>
                     </tr>
                   ))}

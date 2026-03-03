@@ -28,13 +28,15 @@ export default function App() {
             <RecruitmentApplication isNonWindowPeriod={activePage === "校招申请单（非窗口期）"} />
           )}
           {activePage === "校招审批单-需求部门" && <RecruitmentApproval />}
-          {activePage === "校招审批单-一级部门" && <RecruitmentApprovalLevel1 />}
-          {activePage === "校招审批单-公司" && <RecruitmentApprovalCompany />}
-          {activePage === "校招变更单" && <RecruitmentChangeOrder />}
+          {activePage === "校招审批单-一级部门" && <RecruitmentApprovalLevel1 onNavigate={setActivePage} />}
+          {activePage === "校招审批单-公司" && <RecruitmentApprovalCompany onNavigate={setActivePage} />}
+          {(activePage === "校招变更单" || activePage === "校招变更单（非窗口期）") && (
+            <RecruitmentChangeOrder isNonWindowPeriod={activePage === "校招变更单（非窗口期）"} />
+          )}
           {activePage === "校招管理" && <RecruitmentManagement onNavigate={setActivePage} />}
           {activePage === "参数设置" && <RecruitmentParameters onNavigate={setActivePage} />}
           {activePage === "公司审核" && <RecruitmentCompanyAudit onNavigate={setActivePage} />}
-          {activePage === "招聘详情" && <RecruitmentDetails />}
+          {activePage === "校招报表详情" && <RecruitmentDetails />}
           {activePage === "需求收集-校招组" && <RecruitmentRequirementCollectionGroup onNavigate={setActivePage} />}
           {activePage === "需求收集-校招组-详情" && <RecruitmentRequirementCollectionDetail onNavigate={setActivePage} />}
           {activePage === "需求收集-校招PM" && <RecruitmentRequirementCollectionPM onNavigate={setActivePage} />}
@@ -48,10 +50,11 @@ export default function App() {
            activePage !== "校招审批单-一级部门" && 
            activePage !== "校招审批单-公司" && 
            activePage !== "校招变更单" && 
+           activePage !== "校招变更单（非窗口期）" && 
            activePage !== "校招管理" && 
            activePage !== "参数设置" && 
            activePage !== "公司审核" && 
-           activePage !== "招聘详情" && 
+           activePage !== "校招报表详情" && 
            activePage !== "需求收集-校招组" && 
            activePage !== "需求收集-校招组-详情" && 
            activePage !== "需求收集-校招PM" && 

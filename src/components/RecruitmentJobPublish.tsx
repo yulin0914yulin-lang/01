@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Search, User, Edit3, Grid, Layout, CheckCircle, AlertTriangle, 
   Bell, PlayCircle, Shirt, X, LayoutGrid, ChevronDown, ChevronRight,
-  ArrowLeft, ChevronUp, ChevronsLeft, ChevronLeft, ChevronsRight
+  ArrowLeft, ChevronUp, ChevronsLeft, ChevronLeft, ChevronsRight, FileText, Send
 } from 'lucide-react';
 
 export function RecruitmentJobPublish({ onNavigate }: { onNavigate?: (page: string) => void }) {
@@ -74,7 +74,9 @@ export function RecruitmentJobPublish({ onNavigate }: { onNavigate?: (page: stri
            </div>
            <div className="flex-1 overflow-y-auto py-2">
               <SidebarItem icon={<User size={16} />} label="XXXXXX" />
-              <SidebarItem icon={<Edit3 size={16} />} label="校招管理" active />
+              <SidebarItem icon={<Edit3 size={16} />} label="校招管理" />
+              <SidebarItem icon={<Send size={16} />} label="岗位发布" active />
+              <SidebarItem icon={<FileText size={16} />} label="校招报表详情" />
               <SidebarItem icon={<Grid size={16} />} label="系统管理" />
               <SidebarItem icon={<Layout size={16} />} label="开发管理" />
               <SidebarItem icon={<CheckCircle size={16} />} label="消息管理" />
@@ -99,50 +101,6 @@ export function RecruitmentJobPublish({ onNavigate }: { onNavigate?: (page: stri
            <div className="flex-1 px-6 pb-6 overflow-y-auto">
               <div className="bg-white min-h-full p-8 shadow-sm rounded-sm flex flex-col">
                  
-                 {/* Stepper */}
-                 <div className="flex items-center justify-center mb-12 shrink-0">
-                    <Step number={1} title="参数设置" />
-                    <StepLine />
-                    <Step number={2} title="需求收集" />
-                    <StepLine />
-                    <Step number={3} title="公司审核" />
-                    <StepLine />
-                    <Step number={4} title="岗位发布" active />
-                 </div>
-
-                 {/* Section 1: Basic Info */}
-                 <div className="mb-8 shrink-0">
-                    <div className="flex items-center justify-between mb-4 border-b border-gray-100 pb-2">
-                       <div className="flex items-center gap-2 border-l-4 border-[#1890FF] pl-2">
-                          <span className="text-[#1890FF] font-medium text-lg">基本信息</span>
-                       </div>
-                       <div className="flex items-center gap-1 text-gray-500 cursor-pointer text-sm">
-                          收起 <ChevronUp size={16} />
-                       </div>
-                    </div>
-                    
-                    <div className="flex flex-col gap-4 text-xs text-gray-700 whitespace-nowrap px-4">
-                       <div className="flex items-center gap-20">
-                          <div className="flex items-center gap-2">
-                             <span>项目编号 :</span>
-                             <span>XZ2026010101</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                             <span>项目名称 :</span>
-                             <span>2027界校招项目</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                             <span>已填写招聘人数 :</span>
-                             <span>300</span>
-                          </div>
-                       </div>
-                       <div className="flex items-center gap-2">
-                          <span>开始/结束时间 :</span>
-                          <span>2026-08-01 ~ 2027-05-31</span>
-                       </div>
-                    </div>
-                 </div>
-
                  {/* Section 2: Job Posting */}
                  <div className="flex-1 flex flex-col overflow-hidden">
                     <div className="flex items-center justify-between mb-4 border-b border-gray-100 pb-2 shrink-0">
@@ -157,6 +115,10 @@ export function RecruitmentJobPublish({ onNavigate }: { onNavigate?: (page: stri
                     {/* Toolbar */}
                     <div className="flex items-center justify-between mb-4 shrink-0 flex-wrap gap-4">
                        <div className="flex items-center gap-4 text-sm">
+                          <div className="flex items-center gap-2">
+                             <span className="text-gray-600">校招项目</span>
+                             <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />
+                          </div>
                           <div className="flex items-center gap-2">
                              <span className="text-gray-600">实际需求部门</span>
                              <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />

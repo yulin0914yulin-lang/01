@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Search, User, Edit3, Grid, Layout, CheckCircle, AlertTriangle, 
   Bell, PlayCircle, Shirt, X, LayoutGrid, ChevronDown, ChevronRight,
-  ArrowLeft, ChevronUp, ChevronsLeft, ChevronLeft, ChevronsRight
+  ArrowLeft, ChevronUp, ChevronsLeft, ChevronLeft, ChevronsRight, FileText, Send
 } from 'lucide-react';
 
 export function RecruitmentRequirementCollectionPMDetail({ onNavigate }: { onNavigate?: (page: string) => void }) {
+  const [activeTab, setActiveTab] = useState<'details' | 'overview'>('details');
+
   // Mock data matching the screenshot
   const data = [
     { id: 1, actualDept: '实际部门1', fullPath: '一级部门/实际部门1', processNo: '', currentCount: 6, recentCount: 12, posCount: 5, totalCount: 23, nineStars: 3, campus: 20, intern: 0, status: '未开始', submitter: '测试01', approver: '姓名1', operation: '详情', isRed: true },
@@ -15,6 +17,14 @@ export function RecruitmentRequirementCollectionPMDetail({ onNavigate }: { onNav
     { id: 5, actualDept: '实际部门5', fullPath: '一级部门/实际部门5', processNo: '', currentCount: 7, recentCount: 21, posCount: 4, totalCount: 45, nineStars: 20, campus: 20, intern: 5, status: '审批中', submitter: '测试05', approver: '姓名5', operation: '详情', isRed: false },
     { id: 6, actualDept: '实际部门6', fullPath: '一级部门/实际部门6', processNo: '', currentCount: 8, recentCount: 1, posCount: 12, totalCount: 65, nineStars: 35, campus: 30, intern: 0, status: '已完成', submitter: '测试06', approver: '姓名6', operation: '详情', isRed: false },
     { id: 7, actualDept: '实际部门7', fullPath: '一级部门/实际部门7', processNo: '', currentCount: 9, recentCount: 8, posCount: 11, totalCount: 12, nineStars: 0, campus: 0, intern: 12, status: '审批中', submitter: '测试07', approver: '姓名7', operation: '详情', isRed: false },
+  ];
+
+  const overviewData = [
+    { id: 1, deptName: '二级部门A', status: '已提交', deptCount: 5, recruitCount: 20 },
+    { id: 2, deptName: '二级部门B', status: '未提交', deptCount: 0, recruitCount: 0 },
+    { id: 3, deptName: '二级部门C', status: '已提交', deptCount: 3, recruitCount: 12 },
+    { id: 4, deptName: '二级部门D', status: '未提交', deptCount: 0, recruitCount: 0 },
+    { id: 5, deptName: '二级部门E', status: '已提交', deptCount: 8, recruitCount: 35 },
   ];
 
   return (
@@ -74,7 +84,9 @@ export function RecruitmentRequirementCollectionPMDetail({ onNavigate }: { onNav
            </div>
            <div className="flex-1 overflow-y-auto py-2">
               <SidebarItem icon={<User size={16} />} label="XXXXXX" />
-              <SidebarItem icon={<Edit3 size={16} />} label="校招管理" active />
+              <SidebarItem icon={<Edit3 size={16} />} label="校招管理" />
+              <SidebarItem icon={<Send size={16} />} label="岗位发布" />
+              <SidebarItem icon={<FileText size={16} />} label="校招报表详情" active />
               <SidebarItem icon={<Grid size={16} />} label="系统管理" />
               <SidebarItem icon={<Layout size={16} />} label="开发管理" />
               <SidebarItem icon={<CheckCircle size={16} />} label="消息管理" />
@@ -99,19 +111,6 @@ export function RecruitmentRequirementCollectionPMDetail({ onNavigate }: { onNav
            <div className="flex-1 px-6 pb-6 overflow-y-auto">
               <div className="bg-white min-h-full p-8 shadow-sm rounded-sm flex flex-col">
                  
-                 {/* Stepper */}
-                 <div className="flex items-center justify-center mb-12 shrink-0">
-                    <Step number={1} title="参数设置" />
-                    <StepLine />
-                    <Step number={2} title="需求收集" active />
-                    <StepLine />
-                    <div onClick={() => onNavigate && onNavigate("公司审核")} className="cursor-pointer hover:opacity-80">
-                       <Step number={3} title="公司审核" />
-                    </div>
-                    <StepLine />
-                    <Step number={4} title="岗位发布" />
-                 </div>
-
                  {/* Section 1: Basic Info */}
                  <div className="mb-8 shrink-0">
                     <div className="flex items-center justify-between mb-4 border-b border-gray-100 pb-2">
@@ -156,110 +155,178 @@ export function RecruitmentRequirementCollectionPMDetail({ onNavigate }: { onNav
                        </div>
                     </div>
 
-                    {/* Toolbar */}
-                    <div className="flex items-center justify-between mb-4 shrink-0 flex-wrap gap-4">
-                       <div className="flex items-center gap-4 text-sm">
-                          <div className="flex items-center gap-2">
-                             <span className="text-gray-600">部门</span>
-                             <div className="relative">
-                               <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />
-                               <Search size={14} className="absolute right-2 top-2 text-gray-400" />
-                             </div>
-                          </div>
-                          <div className="flex items-center gap-2">
-                             <span className="text-gray-600">提交人</span>
-                             <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />
-                          </div>
-                          <div className="flex items-center gap-2">
-                             <span className="text-gray-600">审批状态</span>
-                             <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />
-                          </div>
+                    {/* Tabs */}
+                    <div className="flex gap-6 border-b border-gray-200 mb-4 shrink-0">
+                       <div 
+                         className={`pb-2 cursor-pointer text-sm font-medium ${activeTab === 'details' ? 'text-[#1890FF] border-b-2 border-[#1890FF]' : 'text-gray-600'}`}
+                         onClick={() => setActiveTab('details')}
+                       >
+                         需求详情
                        </div>
-                       <div className="flex items-center gap-2">
-                          <button className="px-4 py-1 border border-gray-400 text-gray-700 hover:bg-gray-50 text-sm">驳回</button>
-                          <button className="px-4 py-1 border border-gray-400 text-gray-700 hover:bg-gray-50 text-sm">导出</button>
+                       <div 
+                         className={`pb-2 cursor-pointer text-sm font-medium ${activeTab === 'overview' ? 'text-[#1890FF] border-b-2 border-[#1890FF]' : 'text-gray-600'}`}
+                         onClick={() => setActiveTab('overview')}
+                       >
+                         提交情况概览
                        </div>
                     </div>
 
-                    {/* Table Container with Horizontal Scroll */}
-                    <div className="flex-1 overflow-auto border border-gray-200 relative">
-                       <table className="w-max min-w-full text-xs text-center border-collapse">
-                          <thead className="bg-[#FAFAFA] sticky top-0 z-10">
-                             <tr>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 w-10">
-                                   <input type="checkbox" />
-                                </th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">序号</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">实际需求部门</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">部门全路径</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">校招流程单号<br/>一阶段</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">部门现有人数</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">近三年校招生数</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">岗位数</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">招聘总人数</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">九号星招聘人<br/>数</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">校招生招聘人<br/>数</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">暑期实习招聘<br/>人数</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">审批状态</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">提交人</th>
-                                <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">当前审批人</th>
-                                <th className="border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">操作</th>
-                             </tr>
-                          </thead>
-                          <tbody>
-                             {data.map((row) => (
-                                <tr key={row.id} className="hover:bg-gray-50">
-                                   <td className="border-r border-b border-gray-200 py-3 px-2">
-                                      <input type="checkbox" />
-                                   </td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.id}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.actualDept}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.fullPath}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.processNo}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.currentCount}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.recentCount}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.posCount}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.totalCount}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.nineStars}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.campus}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.intern}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.status}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.submitter}</td>
-                                   <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.approver}</td>
-                                   <td className="border-b border-gray-200 py-3 px-2 whitespace-nowrap">
-                                      <button 
-                                        className={`${row.isRed ? 'text-[#D9001B]' : 'text-gray-800'} hover:underline`}
-                                        onClick={() => {
-                                          if (row.id === 1 && onNavigate) {
-                                            onNavigate("校招审批单-需求部门");
-                                          }
-                                        }}
-                                      >
-                                        {row.operation}
-                                      </button>
-                                   </td>
-                                </tr>
-                             ))}
-                          </tbody>
-                       </table>
-                    </div>
+                    {activeTab === 'details' ? (
+                      <>
+                        {/* Toolbar */}
+                        <div className="flex items-center justify-between mb-4 shrink-0 flex-wrap gap-4">
+                           <div className="flex items-center gap-4 text-sm">
+                              <div className="flex items-center gap-2">
+                                 <span className="text-gray-600">部门</span>
+                                 <div className="relative">
+                                   <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />
+                                   <Search size={14} className="absolute right-2 top-2 text-gray-400" />
+                                 </div>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                 <span className="text-gray-600">提交人</span>
+                                 <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />
+                              </div>
+                              <div className="flex items-center gap-2">
+                                 <span className="text-gray-600">审批状态</span>
+                                 <input type="text" className="border border-gray-300 rounded px-2 py-1 w-32 outline-none focus:border-blue-500" />
+                              </div>
+                           </div>
+                           <div className="flex items-center gap-2">
+                              <button className="px-4 py-1 border border-gray-400 text-gray-700 hover:bg-gray-50 text-sm">驳回</button>
+                              <button className="px-4 py-1 border border-gray-400 text-gray-700 hover:bg-gray-50 text-sm">导出</button>
+                           </div>
+                        </div>
+   
+                        {/* Table Container with Horizontal Scroll */}
+                        <div className="flex-1 overflow-auto border border-gray-200 relative">
+                           <table className="w-max min-w-full text-xs text-center border-collapse">
+                              <thead className="bg-[#FAFAFA] sticky top-0 z-10">
+                                 <tr>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 w-10">
+                                       <input type="checkbox" />
+                                    </th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">序号</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">实际需求部门</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">部门全路径</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">校招流程单号<br/>一阶段</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">部门现有人数</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">近三年校招生数</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">岗位数</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">招聘总人数</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">九号星招聘人<br/>数</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">校招生招聘人<br/>数</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">暑期实习招聘<br/>人数</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">审批状态</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">提交人</th>
+                                    <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">当前审批人</th>
+                                    <th className="border-b border-gray-200 py-3 px-2 font-normal text-gray-700 whitespace-nowrap">操作</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 {data.map((row) => (
+                                    <tr key={row.id} className="hover:bg-gray-50">
+                                       <td className="border-r border-b border-gray-200 py-3 px-2">
+                                          <input type="checkbox" />
+                                       </td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.id}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.actualDept}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.fullPath}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.processNo}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.currentCount}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.recentCount}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.posCount}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.totalCount}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.nineStars}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.campus}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.intern}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.status}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.submitter}</td>
+                                       <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600 whitespace-nowrap">{row.approver}</td>
+                                       <td className="border-b border-gray-200 py-3 px-2 whitespace-nowrap">
+                                          <button 
+                                            className={`${row.isRed ? 'text-[#D9001B]' : 'text-gray-800'} hover:underline`}
+                                            onClick={() => {
+                                              if (row.id === 1 && onNavigate) {
+                                                onNavigate("校招审批单-需求部门");
+                                              }
+                                            }}
+                                          >
+                                            {row.operation}
+                                          </button>
+                                       </td>
+                                    </tr>
+                                 ))}
+                              </tbody>
+                           </table>
+                        </div>
+   
+                        {/* Pagination */}
+                        <div className="flex justify-end items-center gap-2 mt-4 text-xs text-gray-500 shrink-0">
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronsLeft size={14} /></button>
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronLeft size={14} /></button>
+                           <button className="w-6 h-6 flex items-center justify-center border border-blue-500 rounded bg-[#1890FF] text-white">1</button>
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">2</button>
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">3</button>
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">4</button>
+                           <span className="mx-1">...</span>
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">10</button>
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronRight size={14} /></button>
+                           <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronsRight size={14} /></button>
+                           <select className="border border-gray-200 rounded p-1 ml-2 bg-white outline-none">
+                             <option>10条/页</option>
+                           </select>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="flex-1 flex flex-col overflow-hidden">
+                         {/* Summary Cards */}
+                         <div className="grid grid-cols-3 gap-4 mb-4 shrink-0">
+                            <div className="bg-blue-50 border border-blue-100 p-4 rounded-sm flex flex-col items-center justify-center">
+                               <span className="text-gray-500 text-sm mb-1">二级部门总数</span>
+                               <span className="text-2xl font-bold text-gray-800">5</span>
+                            </div>
+                            <div className="bg-green-50 border border-green-100 p-4 rounded-sm flex flex-col items-center justify-center">
+                               <span className="text-gray-500 text-sm mb-1">已提交部门数</span>
+                               <span className="text-2xl font-bold text-green-600">3</span>
+                            </div>
+                            <div className="bg-red-50 border border-red-100 p-4 rounded-sm flex flex-col items-center justify-center">
+                               <span className="text-gray-500 text-sm mb-1">未提交部门数</span>
+                               <span className="text-2xl font-bold text-red-600">2</span>
+                            </div>
+                         </div>
 
-                    {/* Pagination */}
-                    <div className="flex justify-end items-center gap-2 mt-4 text-xs text-gray-500 shrink-0">
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronsLeft size={14} /></button>
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronLeft size={14} /></button>
-                       <button className="w-6 h-6 flex items-center justify-center border border-blue-500 rounded bg-[#1890FF] text-white">1</button>
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">2</button>
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">3</button>
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">4</button>
-                       <span className="mx-1">...</span>
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50">10</button>
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronRight size={14} /></button>
-                       <button className="w-6 h-6 flex items-center justify-center border border-gray-200 rounded hover:bg-gray-50"><ChevronsRight size={14} /></button>
-                       <select className="border border-gray-200 rounded p-1 ml-2 bg-white outline-none">
-                         <option>10条/页</option>
-                       </select>
-                    </div>
+                         {/* Table */}
+                         <div className="flex-1 overflow-auto border border-gray-200 relative">
+                            <table className="w-full text-xs text-center border-collapse">
+                               <thead className="bg-[#FAFAFA] sticky top-0 z-10">
+                                  <tr>
+                                     <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700 w-16">序号</th>
+                                     <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700">二级部门</th>
+                                     <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700">提交状态</th>
+                                     <th className="border-r border-b border-gray-200 py-3 px-2 font-normal text-gray-700">提交需求部门数</th>
+                                     <th className="border-b border-gray-200 py-3 px-2 font-normal text-gray-700">招聘人数</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  {overviewData.map((row) => (
+                                     <tr key={row.id} className="hover:bg-gray-50">
+                                        <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600">{row.id}</td>
+                                        <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600">{row.deptName}</td>
+                                        <td className="border-r border-b border-gray-200 py-3 px-2">
+                                           <span className={`px-2 py-1 rounded ${row.status === '已提交' ? 'bg-green-100 text-green-600' : 'bg-gray-100 text-gray-500'}`}>
+                                              {row.status}
+                                           </span>
+                                        </td>
+                                        <td className="border-r border-b border-gray-200 py-3 px-2 text-gray-600">{row.deptCount}</td>
+                                        <td className="border-b border-gray-200 py-3 px-2 text-gray-600">{row.recruitCount}</td>
+                                     </tr>
+                                  ))}
+                               </tbody>
+                            </table>
+                         </div>
+                      </div>
+                    )}
                  </div>
 
               </div>

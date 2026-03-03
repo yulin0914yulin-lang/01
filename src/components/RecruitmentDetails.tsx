@@ -2,7 +2,7 @@ import React from 'react';
 import { 
   Search, User, Edit3, Grid, Layout, CheckCircle, AlertTriangle, 
   Bell, PlayCircle, Shirt, X, LayoutGrid, ChevronDown, ChevronRight,
-  ChevronsLeft, ChevronLeft, ChevronsRight, ArrowLeft
+  ChevronsLeft, ChevronLeft, ChevronsRight, ArrowLeft, FileText, Send
 } from 'lucide-react';
 
 export function RecruitmentDetails() {
@@ -74,7 +74,9 @@ export function RecruitmentDetails() {
            </div>
            <div className="flex-1 overflow-y-auto py-2">
               <SidebarItem icon={<User size={16} />} label="XXXXXX" />
-              <SidebarItem icon={<Edit3 size={16} />} label="校招管理" active />
+              <SidebarItem icon={<Edit3 size={16} />} label="校招管理" />
+              <SidebarItem icon={<Send size={16} />} label="岗位发布" />
+              <SidebarItem icon={<FileText size={16} />} label="校招报表详情" active />
               <SidebarItem icon={<Grid size={16} />} label="系统管理" />
               <SidebarItem icon={<Layout size={16} />} label="开发管理" />
               <SidebarItem icon={<CheckCircle size={16} />} label="消息管理" />
@@ -87,7 +89,7 @@ export function RecruitmentDetails() {
         <div className="flex-1 flex flex-col overflow-hidden bg-[#F0F2F5]">
            {/* Breadcrumb/Title Bar */}
            <div className="h-14 bg-white border-b border-gray-200 flex items-center justify-between px-6 shrink-0">
-              <span className="text-gray-700 text-lg font-medium">招聘详情</span>
+              <span className="text-gray-700 text-lg font-medium">校招报表详情</span>
               <button className="px-5 py-1.5 bg-white border border-gray-300 text-sm text-gray-700 hover:bg-gray-50 transition-colors">导出</button>
            </div>
 

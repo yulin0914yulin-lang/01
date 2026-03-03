@@ -97,8 +97,7 @@ export function RecruitmentParameters({ onNavigate }: { onNavigate?: (page: stri
                     </div>
                     <StepLine />
                     <Step number={3} title="公司审核" />
-                    <StepLine />
-                    <Step number={4} title="岗位发布" />
+
                  </div>
 
                  {/* Section 1: Basic Info */}

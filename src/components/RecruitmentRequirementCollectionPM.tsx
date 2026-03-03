@@ -102,15 +102,16 @@ export function RecruitmentRequirementCollectionPM({ onNavigate }: { onNavigate?
                  
                  {/* Stepper */}
                  <div className="flex items-center justify-center mb-12 shrink-0">
-                    <Step number={1} title="参数设置" />
+                    <div onClick={() => onNavigate && onNavigate("参数设置")} className="cursor-pointer hover:opacity-80">
+                       <Step number={1} title="参数设置" />
+                    </div>
                     <StepLine />
                     <Step number={2} title="需求收集" active />
                     <StepLine />
                     <div onClick={() => onNavigate && onNavigate("公司审核")} className="cursor-pointer hover:opacity-80">
                        <Step number={3} title="公司审核" />
                     </div>
-                    <StepLine />
-                    <Step number={4} title="岗位发布" />
+
                  </div>
 
                  {/* Section 1: Basic Info */}

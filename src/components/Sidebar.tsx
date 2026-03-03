@@ -21,6 +21,7 @@ const initialMenuData: MenuItem[] = [
       { title: "校招审批单-一级部门", type: "file" },
       { title: "校招审批单-公司", type: "file" },
       { title: "校招变更单", type: "file" },
+      { title: "校招变更单（非窗口期）", type: "file" },
     ]
   },
   {
@@ -37,10 +38,10 @@ const initialMenuData: MenuItem[] = [
           { title: "需求收集-校招组", type: "file" },
           { title: "需求收集-校招PM", type: "file" },
           { title: "公司审核", type: "file" },
-          { title: "岗位发布", type: "file" },
         ]
       },
-      { title: "招聘详情", type: "file" }
+      { title: "岗位发布", type: "file" },
+      { title: "校招报表详情", type: "file" },
     ]
   }
 ];
