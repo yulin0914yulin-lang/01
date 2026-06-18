@@ -111,20 +111,31 @@ export function RecruitmentParameters({ onNavigate }: { onNavigate?: (page: stri
                        </div>
                     </div>
                     
-                    <div className="flex items-center gap-8 text-xs text-gray-700 whitespace-nowrap">
-                       <div className="flex items-center gap-2">
-                          <span>项目编号 :</span>
-                          <span>XZ2026010101</span>
+                    <div className="flex items-start justify-between max-w-5xl">
+                       <div className="grid grid-cols-2 gap-x-12 gap-y-4 text-xs text-gray-700 flex-1">
+                          <div className="flex items-center gap-2">
+                             <span className="w-24 shrink-0 text-gray-500">项目编号 :</span>
+                             <span className="font-medium">XZ2026010101</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                             <span className="w-24 shrink-0 text-gray-500">校招届数 :</span>
+                             <select className="border border-gray-300 px-2 py-1 text-xs bg-white outline-none min-w-[120px] rounded-sm">
+                                <option>2024</option>
+                                <option>2025</option>
+                                <option>2026</option>
+                                <option>2027</option>
+                             </select>
+                          </div>
+                          <div className="flex items-center gap-2 text-xs">
+                             <span className="w-24 shrink-0 text-gray-500">项目名称 :</span>
+                             <input type="text" defaultValue="2027界校招项目" className="border border-gray-300 px-2 py-1 w-full max-w-[240px] text-xs outline-none focus:border-[#1890FF] rounded-sm" />
+                          </div>
+                          <div className="flex items-center gap-2">
+                             <span className="w-24 shrink-0 text-gray-500">开始/结束时间 :</span>
+                             <input type="text" defaultValue="2026-08-01 ~ 2027-05-31" className="border border-gray-300 px-2 py-1 w-full max-w-[240px] text-xs outline-none focus:border-[#1890FF] rounded-sm" />
+                          </div>
                        </div>
-                       <div className="flex items-center gap-2">
-                          <span>项目名称 :</span>
-                          <input type="text" defaultValue="2027界校招项目" className="border border-gray-300 px-2 py-1 w-48 text-xs" />
-                       </div>
-                       <div className="flex items-center gap-2">
-                          <span>开始/结束时间 :</span>
-                          <input type="text" defaultValue="2026-08-01 ~ 2027-05-31" className="border border-gray-300 px-2 py-1 w-56 text-xs" />
-                       </div>
-                       <button className="ml-auto px-6 py-1 border border-gray-400 text-gray-700 hover:bg-gray-50 text-xs">保存</button>
+                       <button className="px-6 py-1 border border-gray-400 text-gray-700 hover:bg-gray-50 text-xs">保存</button>
                     </div>
                  </div>
 

@@ -120,6 +120,10 @@ export function RecruitmentCompanyAudit({ onNavigate }: { onNavigate?: (page: st
                              <span>XZ2026010101</span>
                           </div>
                           <div className="flex items-center gap-2">
+                             <span>校招届数 :</span>
+                             <span>2027</span>
+                          </div>
+                          <div className="flex items-center gap-2">
                              <span>项目名称 :</span>
                              <span>2027界校招项目</span>
                           </div>
